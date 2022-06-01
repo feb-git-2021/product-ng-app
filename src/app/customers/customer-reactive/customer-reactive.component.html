@@ -1,0 +1,138 @@
+<div class="card">
+    <div class="card-header">
+        Customer Form!
+    </div>
+    <div class="card-body">
+        <form  (ngSubmit)="save()"  [formGroup]="custRForm">
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="firstNameId" >First Name</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control"
+                    id="firstNameId"
+                    placeholder="First Name (required)"
+                    formControlName="firstName"                   
+                   
+     [ngClass]="{'is-invalid':(custRForm.get('firstName').touched || custRForm.get('firstName').dirty)  && !custRForm.get('firstName').valid}"  />
+                  
+                    <span class="invalid-feedback">
+                        <span *ngIf="custRForm.get('firstName').errors?.required">
+                            First name is mandatory
+                        </span>
+                        <span *ngIf="custRForm.get('firstName').errors?.minlength">
+                            First name must be larger than 3 characters
+                        </span>
+                    </span>
+
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="lastNameId" >Last Name</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control"
+                    id="lastNameId"
+                    placeholder="Last Name (required)"
+                    formControlName="lastName"                 
+                    [ngClass]="{'is-invalid':(custRForm.get('lastName').touched ||custRForm.get('lastName').dirty)  && !custRForm.get('lastName').valid}"  />
+                    <span class="invalid-feedback">
+                        <span *ngIf="custRForm.get('lastName').errors?.required">
+                            Last name is mandatory
+                        </span>
+                        <span *ngIf="custRForm.get('lastName').errors?.maxlength">
+                            LastName cannot exceed 30 characters!!
+                         </span>
+                        
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="emailId" >Email</label>
+                <div class="col-md-8">
+                    <input type="email" class="form-control"
+                    id="emailId"
+                    placeholder="Email (required)"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid':(custRForm.get('email').touched ||custRForm.get('email').dirty)  && !custRForm.get('email').valid}"  />
+                    <span class="invalid-feedback">
+                        <span *ngIf="custRForm.get('email').errors?.required">
+                         Email is mandatory
+                        </span>
+                        <span *ngIf="custRForm.get('email').errors?.pattern">
+                           Email format is not valid
+                        </span>
+                      
+                    </span>
+                </div>
+            </div>
+           
+
+            <div class="form-group row mb-2">
+                <div class="col-md-8">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input"
+                            id="sendCatalogId"
+                            type="checkbox"
+                            formControlName="sendCatalog">
+                            Send me sendCatalog     
+                        </label>
+                    </div>
+                </div> 
+            </div>
+
+
+            <div *ngIf="custRForm.get('sendCatalog').value">
+                <div>
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" for="cityId" >City</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                            id="cityId"
+                            placeholder="City Name"
+                            formControlName="city"
+                           />
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row mb-2" >
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                    [title]="custRForm.valid ? 'Save your data':'disabled until data is valid'"
+                    [disabled]="!custRForm.valid">
+                    Save
+                </button>
+                <button class="btn btn-outline-secondary" type="button" 
+                (click)="showData()">ShowData</button>
+                </div>
+                
+
+            </div>
+            
+
+
+        </form>
+
+    </div>
+</div>
+
+<br>Pristine:{{custRForm.pristine}}
+<br>Dirty:{{custRForm.dirty}}
+<br>Touched:{{custRForm.touched}}
+<br>Valid:{{custRForm.valid}}
+<br>Value:{{custRForm.value|json}}
+<br>&nbsp;
+
+<!--The following changes were made in the template form to convert it to reactive form
+
+-Delete ngModel directive (two way binding) from every input tag
+-Delete  name attribute from every input tag
+-Delete template reference variable from every input tag
+-Add formControName directive to every input tag
+-Replace template reference variable  used for validation with custRForm.get('')
+-Here custRForm is an object of FormGroup
+-->
+
+

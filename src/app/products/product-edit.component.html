@@ -1,0 +1,109 @@
+<div class="card">
+    <div class="card-header">
+        {{title}}
+    </div>
+
+    <div class="card-body">
+        <form novalidate (ngSubmit)="saveProduct()" [formGroup]="productForm">
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="productNameId">Product Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="productNameId" type="text"
+                    placeholder="Product Name(required)"
+                    formControlName="productName"
+                    [ngClass]="{'is-invalid':displayMessage.productName}"/>
+                    <span class="invalid-feedback">
+                        {{displayMessage.productName}}
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="productCodeId">Product Code</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="productCodeId" type="text"
+                    placeholder="Product Code(required)"
+                    formControlName="productCode"
+                    [ngClass]="{'is-invalid':displayMessage.productCode}"/>
+                    <span class="invalid-feedback">
+                        {{displayMessage.productCode}}
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="releaseDateId">Available</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="releaseDateId" type="date"
+                    placeholder="Product Date(required)"
+                    formControlName="releaseDate"
+                    [ngClass]="{'is-invalid':displayMessage.releaseDate}"/>
+                    <span class="invalid-feedback">
+                        {{displayMessage.releaseDate}}
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="priceId">Price</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="priceId" type="text"
+                    placeholder="Product Price(required)"
+                    formControlName="price"
+                    [ngClass]="{'is-invalid':displayMessage.price}"/>
+                    <span class="invalid-feedback">
+                        {{displayMessage.price}}
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="productRatingId">Product Rating</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="productRatingId" type="text"
+                    placeholder="Product Rating(1-5)"
+                    formControlName="starRating"
+                    [ngClass]="{'is-invalid':displayMessage.starRating}"/>
+                    <span class="invalid-feedback">
+                        {{displayMessage.starRating}}
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
+                <div class="col-md-8">
+             <textarea class="form-control"
+             id="descriptionId" placeholder="description of product"
+             rows="3" formControlName="description"></textarea>
+                   
+                </div>
+
+            </div>
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" style="width:80px;" type="submit"
+                    [title]="productForm.valid? 'Save Product Data':'Disabled until form data is valid'"
+                    [disabled]="!productForm.valid">
+                    Save
+                </button>
+                <button class="btn btn-outline-secondary mr-3" style="width:80px;"
+                 type="button" [routerLink]="['/products']">Cancel</button>
+                 <button class="btn btn-outline-warning" style="width:80px;"
+                 type="button" (click)="deleteProduct()">
+                     Delete
+                 </button>
+                </div>
+
+            </div>
+
+
+
+        </form>
+    </div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+{{errorMessage}}
+</div>
+</div>
